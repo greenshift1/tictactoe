@@ -1,0 +1,32 @@
+tic tac toe game
+new game button - done
+choose your sybmol - done
+2 players or vs AI
+AI difficulty
+winscreen
+save load functionality
+game history log
+
+
+
+considirations AI must make (ordered by priority):
+    1)do i lose next turn? do i win next turn?
+    2)how much can i block my opponent?
+    3)how many potential winning rows can i gain?
+    4)how much does the move further my possition twoards a win (or for loss in case of opponent?)
+
+
+
+    possible square values:
+    0.5) taken
+    1) win next turn, lose next turn -      easy30%fail,normal 5%fail
+    2) block value: (0)cant block, because alrdy blocked or free(1-4) num of rows blocked    easy:60% fail normal:20%fail
+    3) unblocked rows i can potentially take: 0-4       easy: 30% fail normal: 30% fail
+    5) how much presense do i have there:
+        *this one really depends on the board size
+
+
+    do winscreen
+    do buttons: 1)cancel flashing
+                2)cancel winscreen
+                3)show AI last move

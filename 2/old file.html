@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        #a, {
+            background: yellow;
+        }
+
+        body {
+            font-size:2em
+        }
+
+        label {
+            font-size: 0.5em;
+        }
+
+        ul {
+            padding-left: 1em;
+            font-size: 0.5em;
+            margin:0em;
+            
+        }
+        .square {
+            position: absolute;
+            width: 2em;
+            height: 2em;
+            text-align:center;
+            line-height: 2em;
+            border:blueviolet;
+            border-style:solid;
+            border-radius:2px;
+            
+        }
+
+        #game {
+            background:bisque;
+            width: 6em;
+            height: 6em;  
+            position: relative;
+            top: 1em;
+            left: 1em;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id = "a,">
+
+    </div>
+    
+    <ul>
+        
+        <li><label for="symbol">Choose a symbol:</label>
+    <select id="symbol">
+        <option value="x">X</option>
+        <option value="o">O</option>
+    </select>
+</li><li>
+    <label for="number-of-players">Number of players:</label>
+    <select id="symbol2">
+        <option value="one">1</option>
+        <option value="two">2</option>
+    </select></li>
+    </ul>
+    <button id="new-game-btn">
+        New Game
+    </button>
+    <div id="game">
+    </div>
+   
+<script>
+    let newGameBtn = document.getElementById("new-game-btn");
+    let selectSymbol = document.getElementById("symbol");
+    let gameGrid = [];
+    let oddTurn = false;
+
+    function Player(symbol) {
+        this.symbol = symbol;
+    }
+    
+    let gm = document.getElementById("game");
+    let player1 = new Player;
+    let player2 = new Player;
+
+    function startNewGame(){
+        oddTurn = false;
+        gm.innerHTML = "";
+        player1.symbol = selectSymbol.value;
+        if (player1.symbol = "O"){
+            player2.symbol = "X";
+            nextTurn();
+        }else {player2.symbol = "O";}
+
+
+        for (let i = 0; i<3; i++){
+            let tempArr = []
+            for (let j = 0; j<3; j++){
+                tempArr[j] = document.createElement("div");
+                tempArr[j].className = "square";
+                tempArr[j].style.top = 100 * i/3 + "%";
+                tempArr[j].style.left = 100 * j/3 + "%";
+                //tempArr[j].style.background = "#" + (127*i).toString(16) + (127*j).toString(16) + (Math.floor(Math.random() * 25)).toString(16);
+                //tempArr[j].style.background = "#ff0000"
+                tempArr[j].innerHTML = 1 + i*3 + j;
+                
+                
+                if (i == 0 && j == 0){
+                    gm.innerHTML = tempArr[j].outerHTML;
+                }else{
+                    let insTemp = gm.lastElementChild;
+                    gm.insertBefore(tempArr[j], insTemp.nextSibling);
+                }
+
+            }            
+            gameGrid[i] = tempArr[i];
+            
+        }
+    }
+
+    function nextTurn(){
+        
+    }
+
+
+   newGameBtn.addEventListener("click", startNewGame);
+   gm.addEventListener("click", nextTurn);
+
+    //console.log(document.getElementById("game").outerHTML);
+        
+</script>
+</body>
+</html>

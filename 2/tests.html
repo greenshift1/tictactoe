@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        .roundedButton {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  margin: 20px auto;
+  background: #fcfff4;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fcfff4), color-stop(40%, #dfe5d7), to(#b3bead));
+  background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.roundedButton label {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  cursor: pointer;
+  background: -webkit-gradient(linear, left top, left bottom, from(#222222), to(#45484d));
+  background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
+  border-radius: 50px;
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
+}
+.roundedButton label:after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  position: absolute;
+  top: 5px;
+  left: 4px;
+  border: 3px solid #fcfff4;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.roundedButton label:hover::after {
+  opacity: 0.3;
+}
+.roundedButton input[type=checkbox] {
+  visibility: hidden;
+}
+.roundedButton input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
+        
+        .scrollable{
+            overflow-y: scroll;
+        }
+
+        #outer {
+            position:relative;
+            background:cadetblue;
+            width:500px;
+            height:500px;
+            left:400px;
+        }
+
+        #inner {
+            position:absolute;
+            background: rgba(0,0,0,0.5);
+            width:600px;
+            height:600px;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="roundedButton">
+        <input type="checkbox" value="None" id="roundedTwo" name="check" checked />
+        <label for="roundedTwo">asdf</label>
+      </div>
+    <!--span class="blinking">Am I blinking?</span>
+
+    <div>
+    <div id="test">hio</div></div>
+    <div id="game"></div>
+    <div style="width:100px; height:100px; background:cornflowerblue; border-style:solid; border-color:black; border-left: 0;"></div>
+    
+    <input type="range" min="1" max="100" value="50" class="slider" id="my-range">
+    <input type=number id="ta">
+        
+    
+    <div>
+        <h1>value</h1>
+        <p id="val-display">
+
+        </p>
+    </div>
+    
+    <h1>to be centered </h1>
+    <div id = "outer" class = "scrollable">
+        <div id="inner"></div>
+    </div-->
+
+
+    <script>
+        function Obj(){
+            this.div;
+
+        }
+/*
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //outerHtml problems - usually because outerHTML variable keeps pointing to old outerHTML element
+        gameEle = document.getElementById("game");
+
+        arrXA = [[[],[],[]],[[],[],[]],[[],[],[]]];
+function xa(){
+        for(let i = 0; i < 3; i++){
+                        for(let j = 0; j < 3; j++){
+                            arrXA[i][j] = new Obj();
+                            
+                            arrXA[i][j].asdf = document.createElement("div");
+                           
+                            gameEle.insertAdjacentElement("beforeend", arrXA[i][j].asdf);
+                            //would print <div></div> (arrXA[i][j].asdf.outerHTML = '<div "class=x">'+ i + '<div>');
+                            //thats a string, not a div!// arrXA[i][j].asdf = (arrXA[i][j].asdf.outerHTML = '<div "class=x">'+ i + '<div>');
+                            //console.log(arrXA[i][j].asdf)
+                        }
+                    }
+}
+
+
+        
+let test1 = document.getElementById("test");
+test1 = test1.outerHTML = "<div>asdf</div>";
+//console.log(test1);
+xa();
+//////////////////////////////////////////////////////////////////////////////
+
+    //setting up slider
+       let myOutput =  document.getElementById("val-display");
+       let slider = document.getElementById("my-range");
+       let txtArea = document.getElementById("ta");
+
+       slider.oninput = function(){
+           txtArea.value = slider.value;
+           myOutput.innerHTML = slider.value;
+       }
+
+       txtArea.oninput = function(){
+           slider.value = txtArea.value;
+           myOutput.innerHTML = txtArea.value;
+       }
+
+    //center div inside another div
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    let inner = document.getElementById("inner");
+    let outer = document.getElementById("outer");
+
+    //displays width in pixels 
+    //console.log(parseInt(outer.offsetWidth) / 2 );
+
+    //centering function -  inner element larger than outer with absolute possition may have unreachable places in overflow
+    inner.style.left = parseInt(outer.offsetWidth) / 2 - parseInt(inner.offsetWidth) / 2 + "px" ;
+    inner.style.top = parseInt(outer.offsetHeight) / 2 - parseInt(inner.offsetHeight) / 2 + "px" ;
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //testing inhiritance 
+    class ObjParant {
+        constructor(){
+            this.callMethod = function (){
+                this.testMethod();
+            }
+            this.testMethod = function (){
+                console.log("1");
+            }
+
+
+        }
+    }
+
+    class objChild extends ObjParant{
+        constructor(){
+            super();
+            this.testMethod = function (){
+                console.log("2");
+            }   
+        }
+    }
+
+    //inheritanceTest.callMethod();//returns 2
+///////////////////////////////////////////////////////////////////////////////////////////
+//question:can you declare functions inside constructors?
+//answer:yes. you must call them without mentioning the object, from within their scope (the function)
+//question: why do i get "this is not defined" when i try to call an object property from an object function?
+//answer: declared object functions cant access object properties
+//question:can i make expressions inside constructor?
+//answer: only if you run them as functions
+class CanYouDeclareFunctions {
+    constructor(){
+        this.asdf = 1;
+
+        this.foo = function(){
+            
+            bar();
+        };
+
+        function bar(){
+            console.log(this.asdf);
+        }
+
+
+    }
+}
+
+let canYou = new CanYouDeclareFunctions();
+canYou.foo();
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+*/
+
+
+
+    </script>
+</body>
+
+</html>
